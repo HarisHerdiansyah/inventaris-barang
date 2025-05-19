@@ -1,5 +1,9 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
+<?php
+include "../config/database.php";
+$items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok, b.kondisi from barang as b left join kategori as k on b.kategori = k.id_kategori order by b.nama_barang asc");
+?>
 
 <main class="px-16 py-4">
   <div class="flex justify-between items-center">
@@ -22,15 +26,69 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="p-2 border border-gray-300"></td>
-        <td class="p-2 border border-gray-300"></td>
-        <td class="p-2 border border-gray-300"></td>
-        <td class="p-2 border border-gray-300"></td>
-        <td class="p-2 border border-gray-300"></td>
-      </tr>
+      <?php
+      while ($row = $items->fetch_assoc()) {
+        $id = $row["id_barang"];
+        $nama_barang = $row["nama_barang"];
+        $stok = $row["stok"];
+        $kondisi = $row["kondisi"] === "0" ? "Kurang Baik" : "Baik";
+        $kategori = $row["nama_kategori"];
+
+        echo '<tr>';
+        echo '<td class="p-2 border border-gray-300">' . $nama_barang . '</td>';
+        echo '<td class="p-2 border border-gray-300">' . $kategori . '</td>';
+        echo '<td class="p-2 border border-gray-300">' . $stok . '</td>';
+        echo '<td class="p-2 border border-gray-300">' . $kondisi . '</td>';
+        echo '<td class="p-2 border border-gray-300">
+          <div class="flex justify-center items-center gap-2">
+            <a href="../pages/manage-items.php?mode=edit&id=' . $id . '">
+              <button 
+                id="editBtn"
+                class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg cursor-pointer flex items-center justify-center"
+                data-id="' . $id . '">
+                <i class="fas fa-pencil-alt text-xl"></i>
+              </button>
+            </a>
+            <button 
+              id="deleteBtn"
+              class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg cursor-pointer flex items-center justify-center"
+              data-id="' . $id . '">
+              <i class="fas fa-trash text-xl text-white"></i>
+            </button>
+          </div>
+        </td>';
+        echo '</tr>';
+      }
+      ?>
     </tbody>
   </table>
 </main>
+
+<script>
+  async function removeItem(formData) {
+    try {
+      await fetch("../service/items.service.php", {
+        method: "POST",
+        body: formData
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      window.location.reload();
+    }
+  }
+
+  document.addEventListener("click", async (e) => {
+    const deleteBtn = e.target.closest(".delete-btn");
+
+    if (deleteBtn) {
+      const formData = new FormData();
+      formData.append("action", "DELETE");
+      formData.append("id", deleteBtn.dataset.id);
+
+      await removeItem(formData);
+    }
+  })
+</script>
 
 <?php include "../layout/bottom.php" ?>
