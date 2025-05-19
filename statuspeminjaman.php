@@ -1,3 +1,6 @@
+<?php include "layout/top.php"?>
+<?php include "layout/navbar.php"?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,3 +90,5 @@
     </div>
 </body> 
 </html>
+
+<?php include "layout/bottom.php"?>
