@@ -49,10 +49,7 @@
     </div>
 
     <div class="flex justify-end mt-16">
-      <button
-        type="submit"
-        name="submit"
-        class="px-4 py-1 flex items-center gap-2 text-lg bg-blue-500 hover:bg-blue-600 text-white rounded-md cursor-pointer">
+      <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 py-2 px-4 font-semibold rounded-md cursor-pointer text-white">
         Tambah Barang
       </button>
     </div>
