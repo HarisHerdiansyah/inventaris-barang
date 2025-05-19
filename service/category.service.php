@@ -6,7 +6,7 @@ function insert($db, $id, $category_name)
   $stmt = $db->prepare("insert into kategori (id_kategori, nama_kategori) values (?, ?)");
   $stmt->bind_param("ss", $id, $category_name);
 
-  if (!$stmt->execute()) {
+  if ($stmt->execute()) {
     echo json_encode([
       "message" => "Kategori berhasil ditambahkan."
     ]);
@@ -22,7 +22,7 @@ function update($db, $id, $category_name)
   $stmt = $db->prepare("update kategori set nama_kategori = ? where id_kategori = ?");
   $stmt->bind_param("ss", $category_name, $id);
 
-  if (!$stmt->execute()) {
+  if ($stmt->execute()) {
     echo json_encode([
       "message" => "Kategori berhasil diperbaharui."
     ]);
@@ -38,7 +38,7 @@ function remove($db, $id)
   $stmt = $db->prepare("delete from kategori where id_kategori = ?");
   $stmt->bind_param("s", $id);
 
-  if (!$stmt->execute()) {
+  if ($stmt->execute()) {
     echo json_encode([
       "message" => "Kategori berhasil dihapus."
     ]);
