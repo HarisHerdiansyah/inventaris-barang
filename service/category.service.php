@@ -1,0 +1,64 @@
+<?php
+include "../config/database.php";
+
+function insert($db, $id, $category_name)
+{
+  $stmt = $db->prepare("insert into kategori (id_kategori, nama_kategori) values (?, ?)");
+  $stmt->bind_param("ss", $id, $category_name);
+
+  if (!$stmt->execute()) {
+    echo json_encode([
+      "message" => "Kategori berhasil ditambahkan."
+    ]);
+  } else {
+    echo json_encode([
+      "message" => "Kategori gagal ditambahkan. Coba lagi."
+    ]);
+  }
+}
+
+function update($db, $id, $category_name)
+{
+  $stmt = $db->prepare("update kategori set nama_kategori = ? where id_kategori = ?");
+  $stmt->bind_param("ss", $category_name, $id);
+
+  if (!$stmt->execute()) {
+    echo json_encode([
+      "message" => "Kategori berhasil diperbaharui."
+    ]);
+  } else {
+    echo json_encode([
+      "message" => "Kategori gagal diperbaharui. Coba lagi."
+    ]);
+  }
+}
+
+function remove($db, $id)
+{
+  $stmt = $db->prepare("delete from kategori where id_kategori = ?");
+  $stmt->bind_param("s", $id);
+
+  if (!$stmt->execute()) {
+    echo json_encode([
+      "message" => "Kategori berhasil dihapus."
+    ]);
+  } else {
+    echo json_encode([
+      "message" => "Kategori gagal diperbaharui. Coba lagi."
+    ]);
+  }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $id = $_POST["id"];
+  $category_name = $_POST["category"];
+  $action = $_POST["action"];
+
+  if (strtolower($action) === "insert") {
+    insert($db, $id, $category_name);
+  } else if (strtolower($action) === "update") {
+    update($db, $id, $category_name);
+  } else {
+    remove($db, $id);
+  }
+}
