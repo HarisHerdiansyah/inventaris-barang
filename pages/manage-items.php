@@ -1,4 +1,5 @@
 <?php include "../layout/top.php" ?>
+<?php include "../layout/navbar.php" ?>
 
 <main class="px-16 py-4">
   <h1 class="text-2xl font-semibold mb-4">Tambah Barang</h1>
