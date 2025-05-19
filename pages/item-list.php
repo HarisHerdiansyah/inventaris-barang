@@ -41,7 +41,7 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok,
         echo '<td class="p-2 border border-gray-300">' . $kondisi . '</td>';
         echo '<td class="p-2 border border-gray-300">
           <div class="flex justify-center items-center gap-2">
-            <a href="../pages/manage-items.php">
+            <a href="../pages/manage-items.php?mode=edit&id=' . $id . '">
               <button 
                 id="editBtn"
                 class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg cursor-pointer flex items-center justify-center"
@@ -63,5 +63,32 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok,
     </tbody>
   </table>
 </main>
+
+<script>
+  async function removeItem(formData) {
+    try {
+      await fetch("../service/items.service.php", {
+        method: "POST",
+        body: formData
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      window.location.reload();
+    }
+  }
+
+  document.addEventListener("click", async (e) => {
+    const deleteBtn = e.target.closest(".delete-btn");
+
+    if (deleteBtn) {
+      const formData = new FormData();
+      formData.append("action", "DELETE");
+      formData.append("id", deleteBtn.dataset.id);
+
+      await removeItem(formData);
+    }
+  })
+</script>
 
 <?php include "../layout/bottom.php" ?>
