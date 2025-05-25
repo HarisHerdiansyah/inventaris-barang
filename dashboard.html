@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&family=Sora:wght@100..800&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Sora", sans-serif;
+      background: url('police2.jpg') center/cover no-repeat fixed;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #003262;
+      height: 10vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3vw;
+      color: #FEFEFA;
+    }
+
+    .navbar .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .navbar button {
+      font-family: "Sora", sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #E5E4E2;
+      color: #011F5B;
+      border: none;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .navbar button:hover {
+      background-color: #C6C4C0;
+      transform: scale(1.02);
+    }
+
+    .content {
+      padding: 4vh 3vw;
+    }
+
+    .segmen {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+      box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      overflow-x: auto;
+    }
+
+    .judul {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #FEFEFA;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 1rem;
+    }
+
+    th {
+      background-color: #00254d;
+      color: #fff;
+      font-weight: 600;
+      padding: 1.5rem;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .status {
+      text-align: center;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-weight: 500;
+    }
+
+    .status.approved {
+      background-color: #86e49d;
+      color: #006b21;
+    }
+
+    .status.waiting {
+      background-color: #ebc474;
+      color: #7c5a00;
+    }
+
+    .status.declined {
+      background-color: #d893a3;
+      color: #b30021;
+    }
+
+    .delete {
+      background-color: #f5f5f5;
+      border: 1.5px solid #ccc;
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .delete:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(1px) scale(1.03);
+    }
+
+    .delete img {
+      height: 1.6rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar .title {
+        font-size: 1.8rem;
+      }
+
+      .navbar button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .judul {
+        font-size: 1.5rem;
+        padding: 0.8rem 1rem;
+      }
+
+      th,
+      td {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="title">Dashboard</div>
+    <button id="logout">Logout</button>
+  </div>
+
+  <div class="content">
+    <div class="segmen">
+      <div class="judul">Riwayat Peminjaman Barang</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Peminjam</th>
+            <th>Barang</th>
+            <th>Jumlah</th>
+            <th>Tanggal Peminjaman</th>
+            <th>Tanggal Pengembalian</th>
+            <th>Approver</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Danial</td>
+            <td>Kalkulator Cinta</td>
+            <td>1</td>
+            <td>23-05-2025</td>
+            <td>24-05-2025</td>
+            <td>Sebastian</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="delete"><img src="delete.png" alt="Delete"></button></td>
+          </tr>
+          <tr>
+            <td>Fai</td>
+            <td>Kalkulator Cinta</td>
+            <td>1</td>
+            <td>23-05-2025</td>
+            <td>24-05-2025</td>
+            <td>Sebastian</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="delete"><img src="delete.png" alt="Delete"></button></td>
+          </tr>
+          <tr>
+            <td>Jikri</td>
+            <td>Breadboard</td>
+            <td>1</td>
+            <td>23-05-2025</td>
+            <td>24-05-2025</td>
+            <td>Sebastian</td>
+            <td><span class="status waiting">Waiting</span></td>
+            <td><button class="delete"><img src="delete.png" alt="Delete"></button></td>
+          </tr>
+          <tr>
+            <td>Newten</td>
+            <td>Laptop</td>
+            <td>1</td>
+            <td>23-05-2025</td>
+            <td>24-05-2025</td>
+            <td>Sebastian</td>
+            <td><span class="status declined">Declined</span></td>
+            <td><button class="delete"><img src="delete.png" alt="Delete"></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
