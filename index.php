@@ -1,8 +1,12 @@
+<?php include "./middleware/middleware.php" ?>
 <?php include "./layout/top.php" ?>
 <?php include "./layout/navbar.php" ?>
 
 <main class="px-16 py-4">
-  <h1 class="text-2xl font-semibold mb-4">Metrik</h1>
+  <h1 class="text-2xl font-semibold mb-4">
+    Metrik
+    (<?php echo $nama ?>)
+  </h1>
   <div id="top-section" class="grid grid-cols-3 gap-5 mb-14">
     <div class="border border-2 border-gray-300 rounded p-6">
       <div class="flex justify-between items-center">

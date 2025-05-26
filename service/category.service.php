@@ -49,16 +49,25 @@ function remove($db, $id)
   }
 }
 
+function not_found()
+{
+  echo json_encode([
+    "message" => "Aksi tidak dapat diproses."
+  ]);
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $id = $_POST["id"];
   $category_name = $_POST["category"];
-  $action = $_POST["action"];
+  $action = strtolower($_POST["action"]);
 
-  if (strtolower($action) === "insert") {
+  if ($action === "insert") {
     insert($db, $id, $category_name);
-  } else if (strtolower($action) === "update") {
+  } else if ($action === "update") {
     update($db, $id, $category_name);
-  } else {
+  } else if ($action === "delete") {
     remove($db, $id);
+  } else {
+    not_found();
   }
 }
