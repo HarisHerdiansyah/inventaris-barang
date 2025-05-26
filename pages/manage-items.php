@@ -22,14 +22,14 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
           name="itemName"
           id="itemName"
           autocomplete="off"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
       </div>
       <div id="form-control" class="flex flex-col">
         <label for="category">Kategori</label>
         <select
           name="category"
           id="category"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
           <option value="">Pilih Kategori</option>
           <?php
           while ($row = $categories->fetch_assoc()) {
@@ -47,14 +47,14 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
           name="stock"
           id="stock"
           autocomplete="off"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
       </div>
       <div id="form-control" class="flex flex-col">
         <label for="condition">Kondisi</label>
         <select
           name="condition"
           id="condition"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
           <option value="">Kondisi Barang</option>
           <option value="1">Baik</option>
           <option value="0">Kurang Baik</option>
