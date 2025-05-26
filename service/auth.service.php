@@ -5,7 +5,8 @@ function register($db, $id, $user_name, $user_email, $user_password)
 {
   $hashed = password_hash($user_password, PASSWORD_DEFAULT);
   $stmt = $db->prepare("insert into users (id_user, nama, email, password, role) values (?, ?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $id, $user_name, $user_email, $hashed, "STAFF");
+  $role = "ADMIN";
+  $stmt->bind_param("sssss", $id, $user_name, $user_email, $hashed, $role);
 
   if ($stmt->execute()) {
     echo json_encode([
