@@ -15,7 +15,7 @@ $categories = $db->query("select * from kategori");
         name="category"
         id="category"
         autocomplete="off"
-        class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+        class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
     </div>
     <div class="flex justify-end">
       <button

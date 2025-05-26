@@ -10,7 +10,7 @@
         <select
           name="items"
           id="items"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm">
           <option value="">Pilih Kategori</option>
           <option value="mebel">Mebel</option>
           <option value="elektronik">Elektronik</option>
@@ -24,7 +24,7 @@
           name="jumlah"
           id="jumlah"
           autocomplete="off"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
       </div>
       <div id="form-control" class="flex flex-col">
         <label for="stock">Tanggal Peminjaman</label>
@@ -33,7 +33,7 @@
           name="stock"
           id="stock"
           autocomplete="off"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
       </div>
       <div id="form-control" class="flex flex-col">
         <label for="stock">Tanggal Pengembalian</label>
@@ -42,7 +42,7 @@
           name="stock"
           id="stock"
           autocomplete="off"
-          class="mt-2 border border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
+          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm" />
       </div>
     </div>
 
