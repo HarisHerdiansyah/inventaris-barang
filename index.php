@@ -2,43 +2,53 @@
 <?php include "./layout/top.php" ?>
 <?php include "./layout/navbar.php" ?>
 
-<main class="px-16 py-4">
-  <h1 class="text-2xl font-semibold mb-4">
-    Metrik
-    (<?php echo $nama ?>)
-  </h1>
+<main class="px-16 py-4 bg-[url(./assets/bg-1.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
+  <div class="py-2 px-4 bg-white/50 backdrop-blur-sm rounded-xl mb-6">
+    <h1 class="text-2xl font-semibold">
+      Metrik
+      (<?php echo $nama ?>)
+    </h1>
+  </div>
   <div id="top-section" class="grid grid-cols-3 gap-5 mb-14">
-    <div class="border border-2 border-gray-300 rounded p-6">
+    <div class="bg-white/40 backdrop-blur-sm border border-2 border-gray-300 rounded-xl p-6">
       <div class="flex justify-between items-center">
-        <p>Total Barang Dipinjam (7 Hari Terakhir):</p>
-        <i class="fas fa-calendar"></i>
+        <p class="font-semibold text-lg">
+          Total Barang Dipinjam (7 Hari Terakhir):
+        </p>
+        <i class="fas fa-calendar text-xl"></i>
       </div>
       <p class="text-2xl mt-2 font-semibold">42</p>
     </div>
-    <div class="border border-2 border-gray-300 rounded p-6">
+    <div class="bg-white/40 backdrop-blur-sm border border-2 border-gray-300 rounded-xl p-6">
       <div class="flex justify-between items-center">
-        <p>Total Anggota Aktif:</p>
-        <i class="fas fa-user"></i>
+        <p class="font-semibold text-lg">Total Anggota Aktif:</p>
+        <i class="fas fa-user text-xl"></i>
       </div>
       <p class="text-2xl mt-2 font-semibold">67</p>
     </div>
-    <div class="border border-2 border-gray-300 rounded p-6">
+    <div class="bg-white/40 backdrop-blur-sm border border-2 border-gray-300 rounded-xl p-6">
       <div class="flex justify-between items-center">
-        <p>Kategori Peminjaman Terbanyak:</p>
-        <i class="fas fa-box"></i>
+        <p class="font-semibold text-lg">Kategori Peminjaman Terbanyak:</p>
+        <i class="fas fa-box text-xl"></i>
       </div>
       <p class="text-2xl mt-2 font-semibold">Kebersihan</p>
     </div>
   </div>
-  <div id="bottom-section" class="grid grid-cols-2 gap-5">
+  <div id="bottom-section" class="grid grid-cols-2 gap-5 bg-white/40 backdrop-blur-sm p-6 rounded-xl">
     <div class="space-y-4">
       <h1 class="text-2xl font-semibold mb-4">Riwayat Permintaan Terakhir:</h1>
       <table class="border border-gray-400 min-w-full border-collapse">
         <thead>
           <tr>
-            <th class="p-2 font-normal border border-gray-300">Nama Peminjam</th>
-            <th class="p-2 font-normal border border-gray-300">Barang</th>
-            <th class="p-2 font-normal border border-gray-300">Tanggal Permintaan</th>
+            <th class="p-2 font-semibold border border-gray-300">
+              Nama Peminjam
+            </th>
+            <th class="p-2 font-semibold border border-gray-300">
+              Barang
+            </th>
+            <th class="p-2 font-semibold border border-gray-300">
+              Tanggal Permintaan
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +58,7 @@
             <td class="p-2 border border-gray-300"></td>
           </tr>
         </tbody>
-        <caption class="caption-bottom mt-3 underline">
+        <caption class="caption-bottom mt-3 underline font-semibold">
           <a href="">Lihat Detail</a>
         </caption>
       </table>

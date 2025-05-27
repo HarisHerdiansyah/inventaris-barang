@@ -5,7 +5,7 @@ function register($db, $id, $user_name, $user_email, $user_password)
 {
   $hashed = password_hash($user_password, PASSWORD_DEFAULT);
   $stmt = $db->prepare("insert into users (id_user, nama, email, password, role) values (?, ?, ?, ?, ?)");
-  $role = "ADMIN";
+  $role = "STAFF";
   $stmt->bind_param("sssss", $id, $user_name, $user_email, $hashed, $role);
 
   if ($stmt->execute()) {
