@@ -37,8 +37,8 @@
                             <td>1</td>
                             <td>23-05-2025</td>
                             <td>
-                              <button class="delete"> <img id="icon" src="delete.png" alt=""> </button>
-                              <button class="delete"> <img id="icon" src="pen.png" alt=""> </button>
+                                <button class="delete pen"> <img id="icon" src="pen.png" alt=""> </button>
+                                <button class="delete bin"> <img id="icon" src="delete.png" alt=""> </button>
                             </td>
                         </tr>
                     </tbody>
