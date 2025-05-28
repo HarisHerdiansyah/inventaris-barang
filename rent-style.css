@@ -1,0 +1,154 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Sora', sans-serif;
+  background-image: url(police6.jpg);
+}
+
+.navbar {
+            background-color: #003262;
+            width: 100%;
+            height: 10vh;
+        }
+
+        .text {
+            border: 0px solid red;
+            float: left;
+            font-size: 2.7rem;
+            font-family: "Sora", sans-serif;
+            color: #FEFEFA;
+            margin-left: 3.5vw;
+            margin-top: 1.85vh;
+            font-weight: bold;
+        }
+
+        #logout {
+            margin-top: 2vh;
+            font-family: "Sora", sans-serif;
+            font-weight: 550;
+            font-size: 1.25rem;
+            padding: 0.7vw 1vw;
+            float: right;
+            margin-right: 4vw;
+            background-color: #E5E4E2;
+            border-radius: 0.8rem;
+            border: none;
+            color: #011F5B;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #logout:hover {
+            background-color: #C6C4C0;
+            transform: translateY(1px)scale(1.02);
+        }
+
+.content {
+    border: 0px solid red;
+    width: 100%;
+    height: 85vh;
+    margin-top: 0;
+}
+
+.segmen {
+    border: 0px solid red;
+    width: 95vw;
+    margin: auto;
+    margin-top: 5vh;
+    padding-bottom: 5vh;
+    background: #fff3;
+    border-radius: 1.8rem;
+    backdrop-filter: blur(0.7rem);
+    box-shadow: 0 .4rem .8rem #0005;
+    overflow: hidden;
+}
+
+.judul {
+    font-family: "Sora", sans-serif;
+    font-weight: 600;
+    font-size: 2.3rem;
+    padding-left: 3.5vw;
+    padding-top: 2.7vh;
+    padding-bottom: 2.5vh;
+    color: #F5F5F5;
+    background-color: #fff4;
+}
+
+.tablebody {
+
+    border-radius: 1rem;
+    background-color: #fffb;
+    overflow: hidden;
+    width: 90vw;
+    margin: auto;
+    border: 0px solid red;
+    margin-top: 4vh;
+}
+
+table {
+    width: 90vw;
+    margin: 0;
+    font-family: "Sora", sans-serif;
+    font-size: 1.05rem;
+}
+
+
+tr:nth-child(even) {
+    background-color: #0000001d;
+}
+
+table,
+th,
+td {
+    border: 0px solid black;
+    border-collapse: collapse;
+    padding: 0.6vw;
+    padding-left: 1rem;
+}
+
+th {
+    background-color: #00254d;
+    color: #FEFEFA;
+    font-weight: 600;
+    text-align: left;
+    height: 5vh;
+    padding:2.7vh;
+}
+
+td {
+    height: 3vh;
+}
+
+.button {
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    border: 1.5px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(1px) scale(1.03);
+    background-color: #f5f5f5;
+}
+
+.button.check{
+  background-color:#08bc04;
+}
+.button.false{
+  background-color:#f0443c;
+}
+
+#icon {
+    height: 4vh;
+    padding: 0.6vh;
+    }
