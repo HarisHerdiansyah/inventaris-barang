@@ -1,48 +1,58 @@
--- JANGAN DIUBAH ATAU EXECUTE DI TERMINAL
-
-create table users (
-  id_user varchar(50) primary key not null,
-  nama varchar(100) not null,
-  email varchar(100) unique not null,
-  password varchar(100) not null,
-  role enum('ADMIN', 'STAFF')
+CREATE TABLE users (
+  id_user VARCHAR(50) PRIMARY KEY NOT NULL,
+  nama VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  role ENUM('ADMIN', 'STAFF') NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table kategori (
-  id_kategori varchar(50) primary key not null,
-  nama_kategori varchar(100) not null
+CREATE TABLE kategori (
+  id_kategori VARCHAR(50) PRIMARY KEY NOT NULL,
+  nama_kategori VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table barang (
-  id_barang varchar(50) primary key not null,
-  kategori varchar(50) not null,
-  nama_barang varchar(100) not null,
-  stok int unsigned not null default 0,
-  kondisi enum('0', '1'),
-  -- 0: Kurang baik; 1: Baik
-  foreign key (kategori) references kategori(id_kategori)
+CREATE TABLE barang (
+  id_barang VARCHAR(50) PRIMARY KEY NOT NULL,
+  id_kategori VARCHAR(50) NOT NULL,
+  nama_barang VARCHAR(100) NOT NULL,
+  stok INT UNSIGNED NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_kategori) REFERENCES kategori(id_kategori)
 );
 
-create table peminjaman (
-  id_peminjaman varchar(50) primary key not null,
-  id_peminjam varchar(50) not null,
-  id_barang varchar(50) not null,
-  status enum('PENDING', 'ACCEPTED', 'REJECTED'),
-  jumlah int unsigned not null default 1,
-  tanggal_pinjam date not null,
-  tanggal_pengembalian date not null,
-  foreign key (id_peminjam) references users(id_user),
-  foreign key (id_barang) references barang(id_barang)
+CREATE TABLE peminjaman (
+  id_peminjaman VARCHAR(50) PRIMARY KEY NOT NULL,
+  id_peminjam VARCHAR(50) NOT NULL,
+  id_barang VARCHAR(50) NOT NULL,
+  status ENUM('PENDING', 'ACCEPTED', 'REJECTED') NOT NULL DEFAULT 'PENDING',
+  jumlah INT UNSIGNED NOT NULL DEFAULT 1,
+  tanggal_pinjam DATE NOT NULL,
+  tanggal_pengembalian DATE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_peminjam) REFERENCES users(id_user),
+  FOREIGN KEY (id_barang) REFERENCES barang(id_barang)
 );
 
-create table riwayat (
-  id_riwayat varchar(50) primary key not null,
-  id_peminjaman varchar(50) not null,
-  id_peminjam varchar(50) not null,
-  id_approver varchar(50) not null,
-  id_barang varchar(50) not null,
-  foreign key (id_peminjaman) references peminjaman(id_peminjaman),
-  foreign key (id_peminjam) references users(id_user),
-  foreign key (id_approver) references users(id_user),
-  foreign key (id_barang) references barang(id_barang)
+CREATE TABLE riwayat (
+  id_riwayat VARCHAR(50) PRIMARY KEY NOT NULL,
+  id_peminjaman VARCHAR(50) NOT NULL,
+  id_peminjam VARCHAR(50) NOT NULL,
+  id_approver VARCHAR(50) NOT NULL,
+  id_barang VARCHAR(50) NOT NULL,
+  status ENUM('PENDING', 'ACCEPTED', 'REJECTED') NOT NULL,
+  jumlah INT UNSIGNED NOT NULL,
+  tanggal_pinjam DATE NOT NULL,
+  tanggal_pengembalian DATE NOT NULL,
+  approved_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman),
+  FOREIGN KEY (id_peminjam) REFERENCES users(id_user),
+  FOREIGN KEY (id_approver) REFERENCES users(id_user),
+  FOREIGN KEY (id_barang) REFERENCES barang(id_barang)
 );
