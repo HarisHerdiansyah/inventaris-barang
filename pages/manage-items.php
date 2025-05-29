@@ -12,7 +12,7 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
 ?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-5.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
-  <section id="manage-items" class="rounded-3xl p-8">
+  <section id="card-container" class="rounded-3xl p-8">
     <h1 class="text-2xl font-semibold mb-4">Tambah Barang</h1>
     <form id="itemForm" class="space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -54,7 +54,7 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
 
       <div class="flex justify-end mt-16">
         <?php
-        echo '<button type="submit" id="manage-items-btn" name="submit" class="py-2 px-4 font-semibold rounded-xl cursor-pointer text-white">' . $wording . '</button>';
+        echo '<button type="submit" name="submit" class="py-2 px-4 font-semibold rounded-xl cursor-pointer text-white bg-[#003262]">' . $wording . '</button>';
         ?>
       </div>
     </form>

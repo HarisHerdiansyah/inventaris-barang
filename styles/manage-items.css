@@ -1,9 +1,0 @@
-section#manage-items {
-  background-color: rgba(245, 245, 245, 0.75);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-#manage-items-btn {
-  background-color: #003262;
-}
