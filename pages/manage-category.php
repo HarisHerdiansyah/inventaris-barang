@@ -7,58 +7,84 @@ $categories = $db->query("select * from kategori");
 ?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-6.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
-  <section id="card-container" class="rounded-3xl p-8">
-    <h1 class="text-2xl font-semibold mb-4">Kelola Kategori</h1>
-    <form id="categoryForm" class="space-y-4">
-      <div id="form-control" class="flex flex-col">
-        <label for="category">Kategori</label>
-        <input
-          type="text"
-          name="category"
-          id="category"
-          autocomplete="off"
-          class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-xl focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm bg-white" />
+  <section id="card-container" class="rounded-3xl p-8 mb-8">
+    <div class="grid grid-cols-3 gap-8">
+      <div class="col-span-2">
+        <h1 class="text-2xl font-semibold mb-4">
+          Kategori dengan Barang Terbanyak
+        </h1>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white rounded-xl p-6">
+            <p class="text-2xl font-semibold">Furnitur</p>
+            <p>Total: 87 Barang</p>
+          </div>
+          <div class="bg-white rounded-xl p-6">
+            <p class="text-2xl font-semibold">Furnitur</p>
+            <p>Total: 87 Barang</p>
+          </div>
+          <div class="bg-white rounded-xl p-6">
+            <p class="text-2xl font-semibold">Furnitur</p>
+            <p>Total: 87 Barang</p>
+          </div>
+          <div class="bg-white rounded-xl p-6">
+            <p class="text-2xl font-semibold">Furnitur</p>
+            <p>Total: 87 Barang</p>
+          </div>
+        </div>
       </div>
-      <div class="flex justify-end">
-        <button
-          data-action="insert"
-          data-target=""
-          id="submitBtn"
-          type="submit"
-          name="submit"
-          class="bg-[#003262] py-2 px-4 font-semibold rounded-xl cursor-pointer text-white">
-          Tambah Kategori
-        </button>
+      <div>
+        <h1 class="text-2xl font-semibold mb-4">
+          Kelola Kategori
+        </h1>
+        <form id="categoryForm" class="space-y-4">
+          <div id="form-control" class="flex flex-col">
+            <input
+              placeholder="Kategori"
+              type="text"
+              name="category"
+              id="category"
+              autocomplete="off"
+              class="mt-2 border-2 border-gray-300 outline-none p-2 rounded-xl focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm bg-white" />
+          </div>
+          <div class="flex justify-end">
+            <button
+              data-action="insert"
+              data-target=""
+              id="submitBtn"
+              type="submit"
+              name="submit"
+              class="bg-[#003262] py-2 px-4 font-semibold rounded-xl cursor-pointer text-white">
+              Tambah Kategori
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </section>
 
-  <h1 class="text-2xl font-semibold mb-4">Daftar Kategori</h1>
-  <table id="data-table" class="min-w-full border-collapse my-10 rounded-xl">
-    <thead>
-      <tr>
-        <th class="p-2 font-semibold text-center">
-          Kategori
-        </th>
-        <th class="p-2 font-semibold text-center">
-          Aksi
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="p-2">-</td>
-        <td class="p-2">-</td>
-      </tr>
+  <section id="card-container" class="rounded-3xl p-8">
+    <h1 class="text-2xl font-semibold mb-4">Daftar Kategori</h1>
+    <table id="data-table" class="min-w-full border-collapse my-10 rounded-xl">
+      <thead>
+        <tr>
+          <th class="p-2 font-semibold text-center">
+            Kategori
+          </th>
+          <th class="p-2 font-semibold text-center">
+            Aksi
+          </th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <?php
-      while ($row = $categories->fetch_assoc()) {
-        $cat_id = $row["id_kategori"];
-        $cat_name = htmlspecialchars($row["nama_kategori"]);
+        <?php
+        while ($row = $categories->fetch_assoc()) {
+          $cat_id = $row["id_kategori"];
+          $cat_name = htmlspecialchars($row["nama_kategori"]);
 
-        echo '<tr>';
-        echo '<td class="p-2 text-center">' . $cat_name . '</td>';
-        echo '<td class="p-2">
+          echo '<tr>';
+          echo '<td class="p-2 text-center">' . $cat_name . '</td>';
+          echo '<td class="p-2">
           <div class="flex justify-center items-center gap-2">
             <button 
               id="editBtn"
@@ -75,11 +101,12 @@ $categories = $db->query("select * from kategori");
             </button>
           </div>
         </td>';
-        echo '</tr>';
-      }
-      ?>
-    </tbody>
-  </table>
+          echo '</tr>';
+        }
+        ?>
+      </tbody>
+    </table>
+  </section>
 </main>
 
 <script type="module">

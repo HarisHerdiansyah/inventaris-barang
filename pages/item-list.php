@@ -3,7 +3,7 @@
 <?php include "../layout/navbar.php" ?>
 <?php
 include "../config/database.php";
-$items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok, b.kondisi from barang as b left join kategori as k on b.kategori = k.id_kategori order by b.nama_barang asc");
+$items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok from barang as b left join kategori as k on b.id_kategori = k.id_kategori order by b.nama_barang asc");
 ?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-4.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
@@ -23,7 +23,6 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok,
           <th class="p-2 font-semibold">Nama Barang</th>
           <th class="p-2 font-semibold">Kategori</th>
           <th class="p-2 font-semibold">Jumlah</th>
-          <th class="p-2 font-semibold">Kondisi</th>
           <th class="p-2 font-semibold">Aksi</th>
         </tr>
       </thead>
@@ -33,14 +32,12 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok,
           $id = $row["id_barang"];
           $nama_barang = $row["nama_barang"];
           $stok = $row["stok"];
-          $kondisi = $row["kondisi"] === "0" ? "Kurang Baik" : "Baik";
           $kategori = $row["nama_kategori"];
 
           echo '<tr>';
           echo '<td class="p-2">' . $nama_barang . '</td>';
           echo '<td class="p-2">' . $kategori . '</td>';
           echo '<td class="p-2">' . $stok . '</td>';
-          echo '<td class="p-2">' . $kondisi . '</td>';
           echo '<td class="p-2">
           <div class="flex justify-center items-center gap-2">
             <a href="../pages/manage-items.php?mode=edit&id=' . $id . '">

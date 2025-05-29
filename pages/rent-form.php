@@ -8,7 +8,7 @@
     <form class="space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div id="form-control" class="flex flex-col">
-          <label for="items">Cari Barang:</label>
+          <label for="items">Kategori Barang:</label>
           <select
             name="items"
             id="items"
@@ -20,15 +20,6 @@
           </select>
         </div>
         <div id="form-control" class="flex flex-col">
-          <label for="jumlah">Jumlah</label>
-          <input
-            type="number"
-            name="jumlah"
-            id="jumlah"
-            autocomplete="off"
-            class="mt-2 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-xl bg-white" />
-        </div>
-        <div id="form-control" class="flex flex-col">
           <label for="stock">Tanggal Peminjaman</label>
           <input
             type="date"
@@ -36,6 +27,19 @@
             id="stock"
             autocomplete="off"
             class="mt-2 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-xl bg-white" />
+        </div>
+        <div id="form-control" class="flex flex-col">
+          <label for="items">Cari Barang:</label>
+          <select
+            name="items"
+            id="items"
+            class="mt-2 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-xl bg-white disabled:bg-gray-300 disabled:text-gray-400"
+            disabled>
+            <option value="">Pilih Barang</option>
+            <option value="mebel">Mebel</option>
+            <option value="elektronik">Elektronik</option>
+            <option value="alat-tulis">Alat Tulis</option>
+          </select>
         </div>
         <div id="form-control" class="flex flex-col">
           <label for="stock">Tanggal Pengembalian</label>
@@ -46,8 +50,16 @@
             autocomplete="off"
             class="mt-2 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-xl bg-white" />
         </div>
+        <div id="form-control" class="flex flex-col">
+          <label for="jumlah">Jumlah</label>
+          <input
+            type="number"
+            name="jumlah"
+            id="jumlah"
+            autocomplete="off"
+            class="mt-2 outline-none p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 shadow-sm rounded-xl bg-white" />
+        </div>
       </div>
-
       <div class="flex justify-end mt-16">
         <button
           type="submit"
