@@ -6,7 +6,7 @@ include "../config/database.php";
 $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok, b.kondisi from barang as b left join kategori as k on b.kategori = k.id_kategori order by b.nama_barang asc");
 ?>
 
-<main class="px-16 py-4">
+<main class="px-16 py-4 bg-[url(../assets/bg-4.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
   <div class="flex justify-between items-center">
     <h1 class="text-2xl font-semibold">Daftar Barang</h1>
     <a href="./manage-items.php">

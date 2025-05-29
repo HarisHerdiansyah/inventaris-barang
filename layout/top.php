@@ -11,6 +11,7 @@
     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/inventaris-barang/styles/manage-items.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Michroma&family=Sora:wght@100..800&display=swap');
 
