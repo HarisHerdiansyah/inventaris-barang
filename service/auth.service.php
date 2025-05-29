@@ -4,9 +4,8 @@ include "../config/database.php";
 function register($db, $id, $user_name, $user_email, $user_password)
 {
   $hashed = password_hash($user_password, PASSWORD_DEFAULT);
-  $stmt = $db->prepare("insert into users (id_user, nama, email, password, role) values (?, ?, ?, ?, ?)");
-  $role = "ADMIN";
-  $stmt->bind_param("sssss", $id, $user_name, $user_email, $hashed, $role);
+  $stmt = $db->prepare("insert into users (id_user, nama, email, password) values (?, ?, ?, ?)");
+  $stmt->bind_param("sssss", $id, $user_name, $user_email, $hashed);
 
   if ($stmt->execute()) {
     echo json_encode([
