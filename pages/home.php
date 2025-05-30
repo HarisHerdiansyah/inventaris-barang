@@ -4,7 +4,9 @@
 
 <main class="px-16 py-4 bg-[url(../assets/bg-1.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
   <section id="card-container" class="rounded-3xl p-8">
-    <h1 class="text-2xl font-semibold mb-4">Selamat Datang, Staff 1!</h1>
+    <h1 class="text-2xl font-semibold mb-4">
+      Selamat Datang, <?php echo $nama ?>
+    </h1>
     <div class="max-w-[600px] grid grid-cols-2 gap-8">
       <a href="./rent-form.php">
         <button class="w-full bg-purple-700 hover:bg-purple-800 py-2 px-4 font-semibold rounded-xl cursor-pointer text-white">

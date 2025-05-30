@@ -48,6 +48,27 @@ function remove($db, $id) {
   }
 }
 
+function get_items($category) {
+  global $db;
+  $stmt = $db->prepare("select id_barang, nama_barang from barang where id_kategori = ? and stok > 0");
+  $stmt->bind_param("s", $category);
+  if (!$stmt->execute()) exit;
+  $items = $stmt->get_result();
+
+  if ($items->num_rows <= 0) exit;
+
+  $data = array();
+  while ($row = $items->fetch_assoc()) {
+    $data[] = $row;
+  }
+  
+  echo json_encode([
+    "message" => "Data berhasil diambil",
+    "data" => $data,
+    "category" => $category
+  ]);
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $action = strtolower($_POST["action"]);
   $id = $_POST["id"];
@@ -62,4 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   } else {
     remove($db, $id);
   }
+} else if ($_SERVER["REQUEST_METHOD"] === "GET") {
+  $category = $_GET["category"];
+  get_items($category);
 }
