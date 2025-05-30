@@ -90,11 +90,11 @@
     formData.append("action", "INSERT");
 
     try {
-      await fetch("../service/rent.service.php", {
+      await fetch("../service/rent-staff.service.php", {
         method: "POST",
         body: formData
       });
-      // window.location.href = "rent-form.php";
+      window.location.href = "rent-form.php";
     } catch (error) {
       console.error("error", error);
     }

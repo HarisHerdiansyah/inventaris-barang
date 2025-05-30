@@ -1,15 +1,15 @@
 <?php
 include __DIR__ . "/../config/database.php";
 
-session_start();
-
-function unauthorized() {
+function unauthorized()
+{
   echo json_encode([
     "message" => "Tidak terautentikasi"
   ]);
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  session_start();
   if (!$_SESSION["uid"]) {
     unauthorized();
     exit;
