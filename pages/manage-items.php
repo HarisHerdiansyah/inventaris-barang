@@ -1,4 +1,4 @@
-<?php include "../middleware/middleware.php" ?>
+<?php include "../middleware/session.middleware.php" ?>
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 <?php

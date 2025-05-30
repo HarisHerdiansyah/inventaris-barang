@@ -1,5 +1,5 @@
 <?php
-include "../config/database.php";
+include __DIR__ . "/../config/database.php";
 
 function insert($db, $id, $category_name)
 {
@@ -71,3 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     not_found();
   }
 }
+
+
+$four_most_items = $db->query("select k.nama_kategori, count(brg.id_kategori) as 'jmlh' from barang as brg left join kategori as k on brg.id_kategori = k.id_kategori group by brg.id_kategori order by jmlh desc limit 4");
+
+$categories = $db->query("select * from kategori");

@@ -37,11 +37,17 @@
     formData.append("action", "LOGIN");
 
     try {
-      await fetch("./service/auth.service.php", {
+      const response = await fetch("./service/auth.service.php", {
         method: "POST",
         body: formData
       });
-      window.location.reload();
+      const responseJson = await response.json();
+      
+      if (responseJson.role === "ADMIN") {
+        window.location.href = "index.php"
+      } else {
+        window.location.href = "pages/home.php";
+      }
     } catch (error) {
       console.error("error login", error);
     }

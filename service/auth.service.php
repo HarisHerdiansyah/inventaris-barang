@@ -51,6 +51,12 @@ function login($db, $user_email, $user_password)
   $_SESSION["uid"] = $user["id_user"];
   $_SESSION["nama"] = $user["nama"];
   $_SESSION["email"] = $user["email"];
+  $_SESSION["role"] = $user["role"];
+
+  echo json_encode([
+    "message" => "Login berhasil",
+    "role" => $user["role"]
+  ]);
 }
 
 function logout()
@@ -71,14 +77,14 @@ function not_found()
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $action = strtolower($_POST["action"]);
-  $id = $_POST["id"];
-  $user_name = $_POST["username"];
   $user_email = $_POST["email"];
   $user_password = $_POST["password"];
 
   if ($action === "login") {
     login($db, $user_email, $user_password);
   } else if ($action === "register") {
+    $id = $_POST["id"];
+    $user_name = $_POST["username"];
     register($db, $id, $user_name, $user_email, $user_password);
   } else if ($action === "logout") {
     logout();
