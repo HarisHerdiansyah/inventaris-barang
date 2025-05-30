@@ -1,14 +1,11 @@
-<?php include "../middleware/middleware.php" ?>
+<?php include "../middleware/session.middleware.php" ?>
+<?php include "../service/category.service.php" ?>
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 <?php
-include "../config/database.php";
-
 $mode = $_GET["mode"] ?? "add";
 $id = $_GET["id"] ?? null;
-$categories = $db->query("select * from kategori order by nama_kategori asc");
 $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
-
 ?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-5.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
@@ -54,7 +51,8 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
 
       <div class="flex justify-end mt-16">
         <?php
-        echo '<button type="submit" name="submit" class="py-2 px-4 font-semibold rounded-xl cursor-pointer text-white bg-[#003262]">' . $wording . '</button>';
+        $bg_btn = $mode === "add" ? "bg-[#003262]" : "bg-purple-700";
+        echo '<button type="submit" name="submit" class="py-2 px-4 font-semibold rounded-xl cursor-pointer text-white ' . $bg_btn . '">' . $wording . '</button>';
         ?>
       </div>
     </form>
@@ -75,7 +73,7 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
         method: "POST",
         body: formData
       });
-      window.location.reload();
+      window.location.href = "pages/item-list.php";
     } catch (e) {
       console.log(e);
     }
@@ -87,7 +85,7 @@ $wording = $mode === "add" ? "Tambah Barang" : "Edit Barang";
         method: "POST",
         body: formData
       });
-      window.location.reload();
+      window.location.href = "pages/item-list.php";
     } catch (e) {
       console.log(e);
     }

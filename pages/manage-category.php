@@ -1,10 +1,7 @@
-<?php include "../middleware/middleware.php" ?>
+<?php include "../middleware/session.middleware.php" ?>
+<?php include "../service/category.service.php" ?>
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
-<?php
-include "../config/database.php";
-$categories = $db->query("select * from kategori");
-?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-6.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
   <section id="card-container" class="rounded-3xl p-8 mb-8">
@@ -14,22 +11,21 @@ $categories = $db->query("select * from kategori");
           Kategori dengan Barang Terbanyak
         </h1>
         <div class="grid grid-cols-2 gap-4">
-          <div class="bg-white rounded-xl p-6">
-            <p class="text-2xl font-semibold">Furnitur</p>
-            <p>Total: 87 Barang</p>
-          </div>
-          <div class="bg-white rounded-xl p-6">
-            <p class="text-2xl font-semibold">Furnitur</p>
-            <p>Total: 87 Barang</p>
-          </div>
-          <div class="bg-white rounded-xl p-6">
-            <p class="text-2xl font-semibold">Furnitur</p>
-            <p>Total: 87 Barang</p>
-          </div>
-          <div class="bg-white rounded-xl p-6">
-            <p class="text-2xl font-semibold">Furnitur</p>
-            <p>Total: 87 Barang</p>
-          </div>
+          <?php
+          while ($row = $four_most_items->fetch_assoc()) {
+            echo '<div class="bg-white rounded-xl p-6">';
+            echo '<p class="text-2xl font-semibold">'.$row["nama_kategori"].'</p>';
+            echo '<p>Total: '.$row["jmlh"].' Barang</p>';
+            echo '</div>';
+          }
+
+          if ($four_most_items->num_rows < 4) {
+            echo '<div class="bg-white rounded-xl p-6">';
+            echo '<p class="text-2xl font-semibold">-</p>';
+            echo '<p>Total: -</p>';
+            echo '</div>';
+          }
+          ?>
         </div>
       </div>
       <div>
