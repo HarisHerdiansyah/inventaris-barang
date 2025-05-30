@@ -1,10 +1,10 @@
 <?php
-include "../config/database.php";
+include __DIR__ . "/../config/database.php";
 
-function insert($db, $id, $itemName, $category, $stock, $condition)
+function insert($db, $id, $itemName, $category, $stock)
 {
-  $stmt = $db->prepare("insert into barang (id_barang, nama_barang, kategori, stok, kondisi) values (?, ?, ?, ?, ?)");
-  $stmt->bind_param("sssis", $id, $itemName, $category, $stock, $condition);
+  $stmt = $db->prepare("insert into barang (id_barang, nama_barang, id_kategori, stok) values (?, ?, ?, ?)");
+  $stmt->bind_param("sssi", $id, $itemName, $category, $stock);
 
   if ($stmt->execute()) {
     echo json_encode([
@@ -17,10 +17,10 @@ function insert($db, $id, $itemName, $category, $stock, $condition)
   }
 }
 
-function update($db, $id, $itemName, $category, $stock, $condition) 
+function update($db, $id, $itemName, $category, $stock) 
 {
-  $stmt = $db->prepare("update barang set nama_barang = ?, kategori = ?, stok = ?, kondisi = ? where id_barang = ?");
-  $stmt->bind_param("ssiss", $itemName, $category, $stock, $condition, $id);
+  $stmt = $db->prepare("update barang set nama_barang = ?, id_kategori = ?, stok = ?, kondisi = ? where id_barang = ?");
+  $stmt->bind_param("ssis", $itemName, $category, $stock, $id);
 
   if ($stmt->execute()) {
     echo json_encode([
@@ -54,12 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $itemName = $_POST["itemName"];
   $category = $_POST["category"];
   $stock = $_POST["stock"];
-  $condition = $_POST["condition"];
 
   if ($action === "insert") {
-    insert($db, $id, $itemName, $category, $stock, $condition);
+    insert($db, $id, $itemName, $category, $stock);
   } else if ($action === "update") {
-    update($db, $id, $itemName, $category, $stock, $condition);
+    update($db, $id, $itemName, $category, $stock);
   } else {
     remove($db, $id);
   }
