@@ -3,7 +3,7 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
-<?php 
+<?php
 include "../middleware/route.middleware.php";
 admin_only();
 ?>
@@ -49,7 +49,7 @@ admin_only();
               data-action="insert"
               data-target=""
               type="submit"
-              class="bg-[#003262] py-2 px-4 font-semibold rounded-xl text-white">
+              class="bg-[#003262] py-2 px-4 font-semibold rounded-xl text-white cursor-pointer">
               Tambah Kategori
             </button>
           </div>
@@ -74,13 +74,13 @@ admin_only();
             <td class="p-2">
               <div class="flex justify-center items-center gap-2">
                 <button
-                  class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg"
+                  class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg cursor-pointer"
                   data-id="<?= htmlspecialchars($row["id_kategori"]) ?>"
                   data-name="<?= htmlspecialchars($row["nama_kategori"]) ?>">
                   <i class="fas fa-pencil-alt text-xl"></i>
                 </button>
                 <button
-                  class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg text-white"
+                  class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg text-white cursor-pointer"
                   data-id="<?= htmlspecialchars($row["id_kategori"]) ?>">
                   <i class="fas fa-trash text-xl"></i>
                 </button>
@@ -104,14 +104,27 @@ admin_only();
 
   async function sendCategory(formData, action) {
     try {
-      await fetch("../service/category.service.php", {
+      const response = await fetch("../service/category.service.php", {
         method: "POST",
         body: formData
       });
+      const responseJson = await response.json();
+
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
+      }
     } catch (error) {
       console.error(error);
-    } finally {
-      window.location.reload();
     }
   }
 
