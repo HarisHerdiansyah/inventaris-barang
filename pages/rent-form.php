@@ -108,6 +108,7 @@
     }
     const formData = new FormData();
     formData.append("category", e.target.value);
+    formData.append("action", "INSERT");
     const response = await fetch("../service/items.service.php?category=" + e.target.value, {
       method: "GET"
     })

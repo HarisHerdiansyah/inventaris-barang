@@ -4,15 +4,15 @@
 <?php include "../layout/navbar.php" ?>
 
 <main class="px-16 py-4 bg-[url(../assets/bg-2.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
-  <section class="rounded-3xl p-8 bg-white bg-opacity-70">
+  <section id="card-container" class="rounded-3xl p-8">
     <h1 class="text-2xl font-semibold mb-4">
       Status Peminjaman <?php echo htmlspecialchars($nama) ?>
     </h1>
 
-    <table class="min-w-full border-collapse my-10 rounded-xl bg-white shadow-md">
+    <table id="data-table" class="min-w-full border-collapse my-10 rounded-xl">
       <thead>
         <tr>
-          <th class="p-2 font-semibold text-left">Barang</th>
+          <th class="p-2 font-semibold">Barang</th>
           <th class="p-2 font-semibold">Jumlah</th>
           <th class="p-2 font-semibold">Waktu Pengajuan</th>
           <th class="p-2 font-semibold">Tanggal Peminjaman</th>
@@ -31,7 +31,7 @@
               <td class="p-2 text-center"><?= htmlspecialchars($row["status"]) ?></td>
               <td class="p-2 text-center">
                 <?php if ($row["status"] === "REJECTED"): ?>
-                  <a href="./rent-form.php" class="underline font-semibold text-blue-600 hover:text-blue-800">Ajukan Ulang</a>
+                  <p data-rent="<?= htmlspecialchars($row["id_peminjaman"]) ?>" class="retry-rent underline font-semibold cursor-pointer">Ajukan Ulang</p>
                 <?php else: ?>
                   -
                 <?php endif; ?>
@@ -47,5 +47,23 @@
     </table>
   </section>
 </main>
+
+<script>
+  document.querySelectorAll(".retry-rent").forEach((clickable) => {
+    clickable.addEventListener("click", async () => {
+      const { rent } = clickable.dataset;
+      const formData = new FormData();
+      formData.append("action", "UPDATE");
+      formData.append("rentId", rent);
+
+      await fetch("../service/rent-staff.service.php", {
+        method: "POST",
+        body: formData
+      });
+
+      window.location.reload();
+    });
+  });
+</script>
 
 <?php include "../layout/bottom.php" ?>
