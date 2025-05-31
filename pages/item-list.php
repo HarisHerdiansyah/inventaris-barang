@@ -1,6 +1,12 @@
 <?php include "../middleware/session.middleware.php" ?>
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
+
+<?php 
+include "../middleware/route.middleware.php";
+admin_only();
+?>
+
 <?php
 include "../config/database.php";
 $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok from barang as b left join kategori as k on b.id_kategori = k.id_kategori order by b.nama_barang asc");

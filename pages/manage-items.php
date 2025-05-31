@@ -1,8 +1,11 @@
 <?php
 include "../middleware/session.middleware.php";
+include "../middleware/route.middleware.php";
 include "../service/category.service.php";
 include "../layout/top.php";
 include "../layout/navbar.php";
+
+admin_only();
 
 $mode = $_GET["mode"] ?? "add";
 $itemId = $_GET["id"] ?? null;

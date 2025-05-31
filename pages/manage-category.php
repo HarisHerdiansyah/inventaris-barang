@@ -3,6 +3,11 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
+<?php 
+include "../middleware/route.middleware.php";
+admin_only();
+?>
+
 <main class="px-16 py-4 bg-[url(../assets/bg-6.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
 
   <section id="card-container" class="rounded-3xl p-8 mb-8">

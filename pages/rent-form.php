@@ -3,6 +3,11 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
+<?php 
+include "../middleware/route.middleware.php";
+staff_only();
+?>
+
 <main class="px-16 py-4 bg-[url(../assets/bg-1.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
   <section id="card-container" class="p-8 rounded-3xl">
     <h1 class="text-2xl font-semibold mb-4">Peminjaman Barang</h1>

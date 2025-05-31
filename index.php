@@ -3,6 +3,11 @@
 <?php include "./layout/top.php" ?>
 <?php include "./layout/navbar.php" ?>
 
+<?php 
+include "./middleware/route.middleware.php";
+admin_only();
+?>
+
 <main class="px-16 py-4 bg-[url(./assets/bg-10.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center space-y-16">
   <section id="card-container" class="rounded-3xl p-8">
     <h1 class="text-2xl font-semibold mb-4">Metrik</h1>

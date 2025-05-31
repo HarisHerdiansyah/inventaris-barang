@@ -46,7 +46,21 @@
         method: "POST",
         body: formData
       });
-      window.location.reload();
+      const responseJson = await response.json();
+
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
+      }
     } catch (error) {
       console.error("register error", error);
     }
@@ -57,7 +71,7 @@
     const formData = new FormData(registerForm);
     formData.append("id", nanoid());
     formData.append("action", "REGISTER");
-    await register(formData);
+    const response = await register(formData);
   });
 </script>
 
