@@ -42,10 +42,18 @@
         body: formData
       });
       const responseJson = await response.json();
-      
+
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      }
+
       if (responseJson.role === "ADMIN") {
         window.location.href = "index.php"
-      } else {
+      } else if (responseJson.role === "STAFF") {
         window.location.href = "pages/home.php";
       }
     } catch (error) {

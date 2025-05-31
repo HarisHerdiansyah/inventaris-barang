@@ -22,7 +22,7 @@ function get_one($db, $id)
 
 function get_items($db, $category)
 {
-  $stmt = $db->prepare("SELECT id_barang, nama_barang FROM barang WHERE id_kategori = ? AND stok > 0");
+  $stmt = $db->prepare("select id_barang, nama_barang from barang where id_kategori = ? and stok > 0");
   $stmt->bind_param("s", $category);
   if (!$stmt->execute()) exit;
   $items = $stmt->get_result();

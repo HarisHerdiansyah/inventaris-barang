@@ -1,8 +1,11 @@
 <?php
 include "../middleware/session.middleware.php";
+include "../middleware/route.middleware.php";
 include "../service/category.service.php";
 include "../layout/top.php";
 include "../layout/navbar.php";
+
+admin_only();
 
 $mode = $_GET["mode"] ?? "add";
 $itemId = $_GET["id"] ?? null;
@@ -107,14 +110,24 @@ $buttonColor = $mode === "add" ? "bg-[#003262]" : "bg-purple-700";
     formData.append("action", isEdit ? "UPDATE" : "INSERT");
 
     try {
-      await fetch("../service/items.service.php", {
+      const response = await fetch("../service/items.service.php", {
         method: "POST",
         body: formData
       });
-      window.location.href = "pages/item-list.php";
+      const responseJson = await response.json();
+
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        window.location.href = "item-list.php";
+        return;
+      }
     } catch (error) {
       console.error("Gagal menyimpan data barang:", error);
-      alert("Terjadi kesalahan saat menyimpan. Silakan coba lagi.");
     }
   });
 </script>

@@ -5,6 +5,11 @@ include "../layout/top.php";
 include "../layout/navbar.php";
 ?>
 
+<?php 
+include "../middleware/route.middleware.php";
+admin_only();
+?>
+
 <main class="px-16 py-4 bg-[url(../assets/bg-4.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
   <section id="card-container" class="rounded-3xl p-8">
     <h1 class="text-2xl font-semibold mb-4">Daftar Peminjaman</h1>
@@ -60,12 +65,25 @@ include "../layout/navbar.php";
       formData.append("quantity", quantity);
       formData.append("status", status);
 
-      await fetch("../service/rent-admin.service.php", {
+      const response = await fetch("../service/rent-admin.service.php", {
         method: "POST",
         body: formData,
       });
+      const responseJson = await response.json();
 
-      window.location.reload();
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
+      }
     });
   });
 </script>

@@ -3,6 +3,11 @@
 <?php include "./layout/top.php" ?>
 <?php include "./layout/navbar.php" ?>
 
+<?php 
+include "./middleware/route.middleware.php";
+admin_only();
+?>
+
 <main class="px-16 py-4 bg-[url(./assets/bg-10.jpg)] min-h-screen bg-cover bg-no-repeat bg-fixed bg-center space-y-16">
   <section id="card-container" class="rounded-3xl p-8">
     <h1 class="text-2xl font-semibold mb-4">Metrik</h1>
@@ -55,8 +60,8 @@
                 <?php while ($row = $last_five_records->fetch_assoc()): ?>
                   <tr class="hover:bg-gray-100">
                     <td class="p-2"><?= htmlspecialchars($row["nama"]) ?></td>
-                    <td class="p-2"><?= htmlspecialchars($row["nama_barang"]) ?></td>
-                    <td class="p-2"><?= htmlspecialchars($row["tanggal_pinjam"]) ?></td>
+                    <td class="p-2 text-center"><?= htmlspecialchars($row["nama_barang"]) ?></td>
+                    <td class="p-2 text-center"><?= htmlspecialchars($row["tanggal_pinjam"]) ?></td>
                   </tr>
                 <?php endwhile; ?>
               <?php else: ?>

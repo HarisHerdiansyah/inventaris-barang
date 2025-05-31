@@ -6,7 +6,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["role"] !== "ADMIN") {
   exit;
 }
 
-$last_seven_days = $db->query("select sum(jumlah) as 'jmlh_peminjaman' from riwayat where tanggal_pinjam >= date(now() - interval 7 day)")->fetch_assoc();
+$last_seven_days = $db->query("select sum(jumlah) as 'jmlh_peminjaman' from riwayat where tanggal_pinjam >= date(now() - interval 7 day) group by status having status = 'ACCEPTED'")->fetch_assoc();
 
 $total_active_staff = $db->query("select count(*) as 'total_anggota' from users where role = 'STAFF'")->fetch_assoc();
 
