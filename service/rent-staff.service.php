@@ -1,8 +1,6 @@
 <?php
 include __DIR__ . "/../config/database.php";
 
-session_start();
-
 function unauthorized()
 {
   echo json_encode(["message" => "Tidak terautentikasi"]);
@@ -38,18 +36,41 @@ function insertRent($db, $uid)
 
 function fetchRents($db, $uid)
 {
-  $stmt = $db->prepare("select brg.nama_barnag, p.jumlah, p.updated_at as waktu_pengajuan, p.tanggal_pinjam, p.status from peminjaman as p left join barang as brg on p.id_barang = brg.id_barang where p.id_peminjam = ? ");
+  $stmt = $db->prepare("select p.id_peminjaman, brg.nama_barang, p.jumlah, p.updated_at as waktu_pengajuan, p.tanggal_pinjam, p.status from peminjaman as p left join barang as brg on p.id_barang = brg.id_barang where p.id_peminjam = ? order by status");
   $stmt->bind_param("s", $uid);
   $stmt->execute();
   return $stmt->get_result();
 }
 
+function retryRent($db)
+{
+  $rent_id = $_POST["rentId"];
+  $stmt = $db->prepare("update peminjaman set status = 'PENDING' where id_peminjaman = ?");
+  $stmt->bind_param("s", $rent_id);
+
+  if (!$stmt->execute()) {
+    http_response_code(500);
+    echo json_encode(["message" => "Gagal melakukan pengajuan ulang"]);
+    exit;
+  }
+
+  echo json_encode(["message" => "Pengajuan ulang berhasil"]);
+  exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  session_start();
   if (!isset($_SESSION["uid"])) {
     unauthorized();
   }
 
-  insertRent($db, $_SESSION["uid"]);
+  $action = strtolower($_POST["action"]);
+
+  if ($action === "insert") {
+    insertRent($db, $_SESSION["uid"]);
+  } else if ($action === "update") {
+    retryRent($db);
+  }
 }
 
 if (isset($_SESSION["uid"])) {
