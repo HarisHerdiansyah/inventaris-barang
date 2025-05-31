@@ -60,8 +60,8 @@ admin_only();
                 <?php while ($row = $last_five_records->fetch_assoc()): ?>
                   <tr class="hover:bg-gray-100">
                     <td class="p-2"><?= htmlspecialchars($row["nama"]) ?></td>
-                    <td class="p-2"><?= htmlspecialchars($row["nama_barang"]) ?></td>
-                    <td class="p-2"><?= htmlspecialchars($row["tanggal_pinjam"]) ?></td>
+                    <td class="p-2 text-center"><?= htmlspecialchars($row["nama_barang"]) ?></td>
+                    <td class="p-2 text-center"><?= htmlspecialchars($row["tanggal_pinjam"]) ?></td>
                   </tr>
                 <?php endwhile; ?>
               <?php else: ?>

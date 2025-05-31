@@ -3,7 +3,7 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
-<?php 
+<?php
 include "../middleware/route.middleware.php";
 staff_only();
 ?>
@@ -95,11 +95,22 @@ staff_only();
     formData.append("action", "INSERT");
 
     try {
-      await fetch("../service/rent-staff.service.php", {
+      const response = await fetch("../service/rent-staff.service.php", {
         method: "POST",
         body: formData
       });
-      window.location.href = "rent-form.php";
+      const responseJson = await response.json();
+
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        window.location.href = "rent-status.php";
+        return;
+      }
     } catch (error) {
       console.error("error", error);
     }

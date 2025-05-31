@@ -65,12 +65,25 @@ admin_only();
       formData.append("quantity", quantity);
       formData.append("status", status);
 
-      await fetch("../service/rent-admin.service.php", {
+      const response = await fetch("../service/rent-admin.service.php", {
         method: "POST",
         body: formData,
       });
+      const responseJson = await response.json();
 
-      window.location.reload();
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
+      }
     });
   });
 </script>

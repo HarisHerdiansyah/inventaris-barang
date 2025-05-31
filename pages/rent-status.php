@@ -3,7 +3,7 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
-<?php 
+<?php
 include "../middleware/route.middleware.php";
 staff_only();
 ?>
@@ -33,7 +33,21 @@ staff_only();
               <td class="p-2 text-center"><?= htmlspecialchars($row["jumlah"]) ?></td>
               <td class="p-2 text-center"><?= htmlspecialchars($row["waktu_pengajuan"]) ?></td>
               <td class="p-2 text-center"><?= htmlspecialchars($row["tanggal_pinjam"]) ?></td>
-              <td class="p-2 text-center"><?= htmlspecialchars($row["status"]) ?></td>
+              <td class="p-2">
+                <?php if ($row["status"] === "PENDING"): ?>
+                  <div class="mx-auto bg-gray-200 w-min text-gray-700 px-1.5 py-0.5 rounded-full">
+                    <?= htmlspecialchars($row["status"]) ?>
+                  </div>
+                <?php elseif ($row["status"] === "REJECTED"): ?>
+                  <div class="mx-auto bg-red-200 w-min text-red-500 px-1.5 py-0.5 rounded-full">
+                    <?= htmlspecialchars($row["status"]) ?>
+                  </div>
+                <?php elseif ($row["status"] === "ACCEPTED"): ?>
+                  <div class="mx-auto bg-green-200 w-min text-green-700 px-1.5 py-0.5 rounded-full">
+                    <?= htmlspecialchars($row["status"]) ?>
+                  </div>
+                <?php endif; ?>
+              </td>
               <td class="p-2 text-center">
                 <?php if ($row["status"] === "REJECTED"): ?>
                   <p data-rent="<?= htmlspecialchars($row["id_peminjaman"]) ?>" class="retry-rent underline font-semibold cursor-pointer">Ajukan Ulang</p>
@@ -56,17 +70,32 @@ staff_only();
 <script>
   document.querySelectorAll(".retry-rent").forEach((clickable) => {
     clickable.addEventListener("click", async () => {
-      const { rent } = clickable.dataset;
+      const {
+        rent
+      } = clickable.dataset;
       const formData = new FormData();
       formData.append("action", "UPDATE");
       formData.append("rentId", rent);
 
-      await fetch("../service/rent-staff.service.php", {
+      const response = await fetch("../service/rent-staff.service.php", {
         method: "POST",
         body: formData
       });
+      const responseJson = await response.json();
 
-      window.location.reload();
+      if (!response.ok) {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
+      }
     });
   });
 </script>
