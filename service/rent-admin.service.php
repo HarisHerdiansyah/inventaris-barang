@@ -119,3 +119,11 @@ function insert_history(string $approverId, string $rentId): void
   $stmt->bind_param("ss", $approverId, $rentId);
   if (!$stmt->execute()) throw new Exception("Gagal menyimpan riwayat");
 }
+
+function get_history() {
+  global $db;
+  $stmt = $db->prepare("select u.nama as 'nama_peminjam', brg.nama_barang, r.jumlah, app.nama as 'approver', r.status, r.approved_at from riwayat as r left join users as u on r.id_peminjam = u.id_user left join users as app on r.id_approver = app.id_user left join barang as brg on r.id_barang = brg.id_barang");
+  if (!$stmt->execute()) throw new Exception("Gagal mengambil data riwayat");
+  $result = $stmt->get_result();
+  return $result;
+}

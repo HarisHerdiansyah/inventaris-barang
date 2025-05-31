@@ -12,11 +12,11 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
       <h1 class="text-2xl font-semibold">Daftar Barang</h1>
       <a href="./manage-items.php">
         <button class="bg-[#003262] py-2 px-4 font-semibold rounded-xl cursor-pointer text-white">
-          <i class="fas fa-plus mr-2"></i>
-          Tambah Barang
+          <i class="fas fa-plus mr-2"></i>Tambah Barang
         </button>
       </a>
     </div>
+
     <table id="data-table" class="min-w-full border-collapse my-10 rounded-xl">
       <thead>
         <tr>
@@ -27,38 +27,36 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
         </tr>
       </thead>
       <tbody>
-        <?php
-        while ($row = $items->fetch_assoc()) {
-          $id = $row["id_barang"];
-          $nama_barang = $row["nama_barang"];
-          $stok = $row["stok"];
-          $kategori = $row["nama_kategori"];
-
-          echo '<tr>';
-          echo '<td class="p-2">' . $nama_barang . '</td>';
-          echo '<td class="p-2">' . $kategori . '</td>';
-          echo '<td class="p-2">' . $stok . '</td>';
-          echo '<td class="p-2">
-          <div class="flex justify-center items-center gap-2">
-            <a href="../pages/manage-items.php?mode=edit&id=' . $id . '">
-              <button 
-                id="editBtn"
-                class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg cursor-pointer flex items-center justify-center"
-                data-id="' . $id . '">
-                <i class="fas fa-pencil-alt text-xl"></i>
-              </button>
-            </a>
-            <button 
-              id="deleteBtn"
-              class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg cursor-pointer flex items-center justify-center"
-              data-id="' . $id . '">
-              <i class="fas fa-trash text-xl text-white"></i>
-            </button>
-          </div>
-        </td>';
-          echo '</tr>';
-        }
-        ?>
+        <?php if ($items->num_rows > 0): ?>
+          <?php while ($row = $items->fetch_assoc()): ?>
+            <tr class="hover:bg-gray-100 transition">
+              <td class="p-2"><?= htmlspecialchars($row["nama_barang"]) ?></td>
+              <td class="p-2"><?= htmlspecialchars($row["nama_kategori"] ?? "-") ?></td>
+              <td class="p-2"><?= htmlspecialchars($row["stok"]) ?></td>
+              <td class="p-2">
+                <div class="flex gap-2">
+                  <a href="../pages/manage-items.php?mode=edit&id=<?= urlencode($row["id_barang"]) ?>">
+                    <button
+                      class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg flex items-center justify-center"
+                      title="Edit">
+                      <i class="fas fa-pencil-alt text-xl"></i>
+                    </button>
+                  </a>
+                  <button
+                    class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg flex items-center justify-center text-white"
+                    data-id="<?= htmlspecialchars($row["id_barang"]) ?>"
+                    title="Hapus">
+                    <i class="fas fa-trash text-xl"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="4" class="text-center py-4 text-gray-500">Tidak ada barang tersedia.</td>
+          </tr>
+        <?php endif; ?>
       </tbody>
     </table>
   </section>
@@ -67,14 +65,19 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
 <script>
   async function removeItem(formData) {
     try {
-      await fetch("../service/items.service.php", {
+      const response = await fetch("../service/items.service.php", {
         method: "POST",
         body: formData
       });
-    } catch (e) {
-      console.log(e);
-    } finally {
+
+      if (!response.ok) {
+        throw new Error("Gagal menghapus barang");
+      }
+
       window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert("Terjadi kesalahan saat menghapus barang. Silakan coba lagi.");
     }
   }
 
@@ -82,13 +85,16 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
     const deleteBtn = e.target.closest(".delete-btn");
 
     if (deleteBtn) {
+      const confirmed = confirm("Apakah Anda yakin ingin menghapus barang ini?");
+      if (!confirmed) return;
+
       const formData = new FormData();
       formData.append("action", "DELETE");
       formData.append("id", deleteBtn.dataset.id);
 
       await removeItem(formData);
     }
-  })
+  });
 </script>
 
 <?php include "../layout/bottom.php" ?>
