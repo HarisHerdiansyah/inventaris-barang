@@ -2,7 +2,7 @@
 <?php include "../layout/top.php" ?>
 <?php include "../layout/navbar.php" ?>
 
-<?php 
+<?php
 include "../middleware/route.middleware.php";
 admin_only();
 ?>
@@ -43,13 +43,13 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
                 <div class="flex gap-2">
                   <a href="../pages/manage-items.php?mode=edit&id=<?= urlencode($row["id_barang"]) ?>">
                     <button
-                      class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg flex items-center justify-center"
+                      class="edit-btn w-10 h-10 bg-yellow-400 hover:bg-yellow-500 rounded-lg flex items-center justify-center cursor-pointer"
                       title="Edit">
                       <i class="fas fa-pencil-alt text-xl"></i>
                     </button>
                   </a>
                   <button
-                    class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg flex items-center justify-center text-white"
+                    class="delete-btn w-10 h-10 bg-red-500 hover:bg-red-600 rounded-lg flex items-center justify-center text-white cursor-pointer"
                     data-id="<?= htmlspecialchars($row["id_barang"]) ?>"
                     title="Hapus">
                     <i class="fas fa-trash text-xl"></i>
@@ -75,15 +75,27 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
         method: "POST",
         body: formData
       });
+      const responseJson = await response.json();
 
       if (!response.ok) {
-        throw new Error("Gagal menghapus barang");
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'error',
+        })
+        return;
+      } else {
+        Swal.fire({
+          title: responseJson.message,
+          icon: 'success',
+        })
+        return;
       }
-
-      window.location.reload();
     } catch (error) {
       console.error(error);
-      alert("Terjadi kesalahan saat menghapus barang. Silakan coba lagi.");
+      Swal.fire({
+        title: "Terjadi Kesalahan",
+        icon: "error"
+      });
     }
   }
 
@@ -91,13 +103,9 @@ $items = $db->query("select b.id_barang, b.nama_barang, k.nama_kategori, b.stok 
     const deleteBtn = e.target.closest(".delete-btn");
 
     if (deleteBtn) {
-      const confirmed = confirm("Apakah Anda yakin ingin menghapus barang ini?");
-      if (!confirmed) return;
-
       const formData = new FormData();
       formData.append("action", "DELETE");
       formData.append("id", deleteBtn.dataset.id);
-
       await removeItem(formData);
     }
   });
