@@ -139,7 +139,6 @@
   }
 
   async function deleteCategory(id) {
-    console.log("invo")
     const formData = new FormData();
     formData.append("id", id);
     formData.append("action", "DELETE");

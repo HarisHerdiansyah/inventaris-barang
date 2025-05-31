@@ -90,11 +90,11 @@
     formData.append("action", "INSERT");
 
     try {
-      await fetch("../service/rent.service.php", {
+      await fetch("../service/rent-staff.service.php", {
         method: "POST",
         body: formData
       });
-      // window.location.href = "rent-form.php";
+      window.location.href = "rent-form.php";
     } catch (error) {
       console.error("error", error);
     }
@@ -108,6 +108,7 @@
     }
     const formData = new FormData();
     formData.append("category", e.target.value);
+    formData.append("action", "INSERT");
     const response = await fetch("../service/items.service.php?category=" + e.target.value, {
       method: "GET"
     })
