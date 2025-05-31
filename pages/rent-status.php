@@ -40,7 +40,7 @@
           <?php endwhile; ?>
         <?php else: ?>
           <tr>
-            <td colspan="6" class="p-4 text-center text-gray-500">Belum ada riwayat peminjaman.</td>
+            <td colspan="6" class="p-4 text-center text-gray-500">Belum ada peminjaman yang diajukan.</td>
           </tr>
         <?php endif; ?>
       </tbody>
