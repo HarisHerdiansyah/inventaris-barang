@@ -1,0 +1,43 @@
+A. Cara menjalankan web:
+
+1. Simpan folder /inventaris-barang di C:/xampp/htdocs -> C:/xampp/htdocs/inventaris-barang.
+2. Buat database baru dengan nama `inventory`. Kemudian, Buka schema/db.sql dan jalankan semua perintah untuk mendefinisikan table yang diperlukan.
+3. Buat file .env di /inventaris-barang (root level). Sesuaikan konfigurasi dengan server database yang digunakan (local atau cloud). Dan set MODE=production
+
+Isi dari .env:
+DB_HOSTNAME=
+DB_USER=
+DB_PASSWORD=
+DB_NAME_PROD=
+DB_PORT=
+MODE=production
+
+4. Untuk menginisiasi database secara otomatis, install Node JS versi LTS dan PNPM versi LTS. (Atau lompat ke nomor 6 jika ingin langsung menambah data melalui web).
+5. Jalankan `pnpm install` di /inventaris-barang. Lalu jalankan `pnpm run schema/seed.js`. Database akan terinisiasi tanpa perlu menambah data secara manual.
+6. Jalankan XAMPP dan buka localhost/inventaris-barang untuk menjalankan aplikasi.
+
+Catatan:
+- Secara default, pengguna yang registrasi melalui web, akan tercatat sebagai STAFF, gunakan API untuk melakukan registrasi untuk ADMIN.
+
+
+
+B. Cara menjalankan API (untuk registrasi admin):
+
+1. Pastikan database telah disiapkan (lihat langkah nomor 2 dan 3 bagian A).
+1. Install Node JS versi LTS dan PNPM versi LTS.
+2. Jalankan `pnpm install`. Lalu jalankan `pnpm run serve`.
+3. Buka Thunder Client/Postman/Insomnia untuk memanggil API.
+4. Masukkan url `http://localhost:3000/api/register` dengan method `POST`.
+5. Masukkan request body berupa JSON seperti berikut:
+{
+  "name": <string>,
+  "email": <string>,
+  "password": <string>
+}
+6. Jalankan request dan cek table `users` maka akan ada users baru dengan role ADMIN.
+
+
+
+
+
+
