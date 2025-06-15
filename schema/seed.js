@@ -8,7 +8,7 @@ const { nanoid } = require('nanoid');
     host: process.env.DB_HOSTNAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME_DEV,
+    database: process.env.DB_NAME_PROD,
     port: process.env.DB_PORT
   });
 
